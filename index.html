@@ -5,12 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Have You Ever? — Class Bar Graph</title>
 <style>
-  /* ---------- Design tokens ----------
-     Subject: a D75 classroom scoreboard the class builds together.
-     Palette: pitch green + warm gold + deep navy ink on a chalk-cream field.
-     Type: Fredoka (rounded, friendly display) + Nunito (legible body).
-     Signature: the bar graph that grows live as the class plays, then
-     becomes the analysis board. */
   @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap');
  
   :root {
@@ -49,7 +43,6 @@
   }
   .wrap { max-width: 1200px; margin: 0 auto; padding: 22px clamp(14px, 3vw, 40px) 40px; }
  
-  /* ---------- Top bar ---------- */
   header {
     display: flex; align-items: center; gap: 16px;
     background: var(--navy);
@@ -76,7 +69,6 @@
     color: #EAF3EC; white-space: nowrap;
   }
  
-  /* ---------- Screens ---------- */
   .screen { display: none; margin-top: 22px; animation: rise .4s ease both; }
   .screen.active { display: block; }
   @keyframes rise { from { opacity: 0; transform: translateY(14px);} to { opacity:1; transform:none; } }
@@ -97,7 +89,6 @@
   }
   .lead { font-size: clamp(16px, 2vw, 20px); color: var(--mute); font-weight: 700; max-width: 60ch; }
  
-  /* ---------- Buttons ---------- */
   .btn {
     font-family:'Fredoka',sans-serif; font-weight: 600;
     border: none; cursor: pointer; border-radius: 16px;
@@ -122,7 +113,6 @@
   .spread { justify-content: space-between; }
   .center { justify-content: center; }
  
-  /* ---------- Setup: class size + prompt list ---------- */
   .field-label { font-weight:800; color: var(--navy); margin-bottom: 8px; font-size: 17px; }
   .stepper { display:flex; align-items:center; gap: 14px; }
   .stepper .num {
@@ -165,7 +155,6 @@
   }
   .custom-row input:focus { outline:none; border-color: var(--green); }
  
-  /* ---------- Play screen ---------- */
   .play-grid { display:grid; grid-template-columns: 1fr; gap: 22px; }
   .prompt-stage {
     background: linear-gradient(160deg, var(--navy) 0%, #1c3854 100%);
@@ -200,9 +189,9 @@
   .live-graph-card h3 { font-family:'Fredoka',sans-serif; margin: 0 0 4px; color: var(--navy); font-size: 20px; }
   .live-graph-card .cap { color: var(--mute); font-weight:700; font-size: 14px; margin-bottom: 8px; }
  
-  /* ---------- The bar graph (shared render) ---------- */
-  .graph { display:flex; flex-direction:column; gap: 0; flex:1; }
-  .graph-inner { display:flex; align-items:flex-end; gap: clamp(8px,2vw,22px); height: 100%; min-height: 220px; padding: 0 6px; border-left: 3px solid var(--navy); border-bottom: 3px solid var(--navy); }
+  .graph { display:flex; flex-direction:column; gap: 0; }
+  .graph-inner { display:flex; align-items:flex-end; gap: clamp(8px,2vw,22px); height: 240px; padding: 0 6px; border-left: 3px solid var(--navy); border-bottom: 3px solid var(--navy); }
+  .graph-inner.tall { height: 320px; }
   .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
   .bar {
     width: 100%; max-width: 96px; border-radius: 10px 10px 0 0;
@@ -220,13 +209,11 @@
  
   .scale-note { font-size: 13px; color: var(--mute); font-weight:700; margin-top:6px; }
  
-  /* progress dots */
   .progress { display:flex; gap: 8px; align-items:center; }
   .pdot { width: 14px; height:14px; border-radius:50%; background: var(--line); }
   .pdot.done { background: var(--green); }
   .pdot.current { background: var(--gold); transform: scale(1.25); }
  
-  /* ---------- Analyze screen ---------- */
   .analyze-grid { display:grid; grid-template-columns: 1.15fr .85fr; gap: 22px; }
   @media (max-width: 900px){ .analyze-grid { grid-template-columns: 1fr; } }
   .qbox { background: var(--paper); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px; }
@@ -268,7 +255,6 @@
     <div class="step-pill" id="stepPill">Set up</div>
   </header>
  
-  <!-- ============ SCREEN 1: SETUP ============ -->
   <section class="screen active" id="screen-setup">
     <div class="card">
       <div class="eyebrow">Before we play</div>
@@ -310,7 +296,6 @@
     <footer class="tips">Tip: 3 prompts matches the graph goal exactly. You can add more or stop whenever you like.</footer>
   </section>
  
-  <!-- ============ SCREEN 2: PLAY ============ -->
   <section class="screen" id="screen-play">
     <div class="play-grid">
       <div class="prompt-stage">
@@ -352,14 +337,13 @@
     </div>
   </section>
  
-  <!-- ============ SCREEN 3: ANALYZE ============ -->
   <section class="screen" id="screen-analyze">
     <div class="analyze-grid">
       <div class="card">
         <div class="eyebrow">Our class data</div>
         <h2 class="big" style="margin-bottom:4px;">Now let's read it</h2>
         <div class="cap" style="color:var(--mute);font-weight:700;margin-bottom:14px;">This graph is about US. Touch the top of a bar, slide to the number.</div>
-        <div class="graph" style="min-height:340px;"><div class="graph-inner" id="finalGraph" style="min-height:300px;"></div></div>
+        <div class="graph"><div class="graph-inner tall" id="finalGraph"></div></div>
       </div>
  
       <div class="qbox">
@@ -397,7 +381,6 @@
 (function(){
   "use strict";
  
-  // ---------- Data ----------
   var BAR_COLORS = ['var(--bar-a)','var(--bar-b)','var(--bar-c)','var(--bar-d)','var(--bar-e)','var(--bar-f)'];
   var SOCCER = [
     "kicked a soccer ball",
@@ -418,9 +401,9 @@
  
   var state = {
     classSize: 10,
-    prompts: [],      // {text, color, count, locked}
-    current: 0,       // index during play
-    aq: 0,            // analyze question index
+    prompts: [],    
+    current: 0,       
+    aq: 0,           
     questions: []
   };
  
@@ -508,7 +491,6 @@
     renderQueue();
   };
  
-  // ---------- Shared graph renderer ----------
   function renderGraph(container, prompts, opts){
     opts = opts || {};
     container.innerHTML = '';
@@ -522,10 +504,8 @@
         bar.style.height = pct + '%';
       } else {
         bar.style.height = '0%';
-        // grow after paint; stagger on the final graph so bars rise one at a time.
         var delay = (opts.stagger ? i*160 : 30);
         setTimeout(function(){ bar.style.height = pct+'%'; }, delay);
-        // safety net: guarantee the height lands even if the timer is throttled.
         setTimeout(function(){ if(bar.style.height==='0%' && pct>0) bar.style.height = pct+'%'; }, 1200 + (opts.stagger ? i*160 : 0));
       }
       if(opts.showVals){ var v=document.createElement('span'); v.className='val'; v.textContent=p.count; bar.appendChild(v); }
@@ -544,7 +524,6 @@
     renderGraph($('liveGraph'), upto, { showVals:true });
   }
  
-  // ---------- Play ----------
   function startGame(){
     if(!state.prompts.length) return;
     state.current = 0;
@@ -602,7 +581,6 @@
     });
   }
  
-  // ---------- Build analysis questions from the data ----------
   function buildQuestions(){
     var ps = state.prompts.map(function(p){ return {label:shortLabel(p.text), count:p.count, color:p.color}; });
     var qs = [];
@@ -619,13 +597,11 @@
       answer: "\u201C" + fewest.label + "\u201D — " + fewest.count + " hands. It has the shortest bar.",
       highlight: [ps.indexOf(fewest)]
     });
-    // read a specific bar (first prompt)
     qs.push({
       text: "How many hands for \u201C" + ps[0].label + "\u201D?",
       answer: ps[0].count + " hands. Touch the top of that bar, slide to the number.",
       highlight: [0]
     });
-    // how many more (top two)
     if(ps.length >= 2){
       var diff = most.count - fewest.count;
       qs.push({
@@ -634,14 +610,12 @@
         highlight: [ps.indexOf(most), ps.indexOf(fewest)]
       });
     }
-    // total
     var total = ps.reduce(function(s,p){ return s+p.count; },0);
     qs.push({
       text: "How many hands ALTOGETHER?",
       answer: ps.map(function(p){return p.count;}).join(" + ") + " = " + total + " hands.",
       highlight: ps.map(function(_,i){return i;})
     });
-    // reflection (about us)
     qs.push({
       text: "What does our tallest bar say about our class?",
       answer: "Most of us have " + most.label + "! The tallest bar tells us what we have most in common.",
@@ -690,7 +664,6 @@
  
   $('startBtn').onclick = startGame;
  
-  // keyboard: space/enter +1 during play; arrows for questions
   document.addEventListener('keydown', function(e){
     if($('screen-play').classList.contains('active')){
       if(e.key===' '||e.key==='+'){ e.preventDefault(); setCount(state.prompts[state.current].count+1); }
@@ -706,13 +679,11 @@
   // ---------- Init ----------
   buildChips('chips-soccer', SOCCER);
   buildChips('chips-fun', FUN);
-  // preload 3 sensible defaults so a teacher can start instantly
   ['Have you ever kicked a soccer ball?','Have you ever eaten pizza?','Have you ever had a pet?'].forEach(function(t){
     state.prompts.push({text:t,count:0,locked:false});
   });
   renderQueue();
   renderClass();
-  // mark preloaded chips
   document.querySelectorAll('.chip').forEach(function(ch){
     if(state.prompts.some(function(p){return p.text===ch.dataset.text;})) ch.classList.add('added');
   });
