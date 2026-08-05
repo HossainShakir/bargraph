@@ -6,7 +6,7 @@
 <title>Have You Ever? — Class Bar Graph</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap');
- 
+
   :root {
     --green: #1B7A43;
     --green-deep: #0E5A30;
@@ -29,7 +29,7 @@
     --shadow: 0 10px 30px rgba(20,40,60,.14);
     --radius: 22px;
   }
- 
+
   * { box-sizing: border-box; }
   html, body { height: 100%; }
   body {
@@ -42,7 +42,7 @@
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 1200px; margin: 0 auto; padding: 22px clamp(14px, 3vw, 40px) 40px; }
- 
+
   header {
     display: flex; align-items: center; gap: 16px;
     background: var(--navy);
@@ -68,16 +68,16 @@
     padding: 8px 16px; border-radius: 999px; font-weight: 800; font-size: 14px;
     color: #EAF3EC; white-space: nowrap;
   }
- 
+
   .screen { display: none; margin-top: 22px; animation: rise .4s ease both; }
   .screen.active { display: block; }
   @keyframes rise { from { opacity: 0; transform: translateY(14px);} to { opacity:1; transform:none; } }
- 
+
   .card {
     background: var(--paper); border-radius: var(--radius);
     box-shadow: var(--shadow); padding: clamp(20px, 3vw, 34px);
   }
- 
+
   .eyebrow {
     font-family:'Fredoka',sans-serif; font-weight:700; letter-spacing:2px;
     text-transform: uppercase; font-size: 14px; color: var(--green);
@@ -88,7 +88,7 @@
     line-height: 1.05;
   }
   .lead { font-size: clamp(16px, 2vw, 20px); color: var(--mute); font-weight: 700; max-width: 60ch; }
- 
+
   .btn {
     font-family:'Fredoka',sans-serif; font-weight: 600;
     border: none; cursor: pointer; border-radius: 16px;
@@ -108,11 +108,11 @@
   .btn-nav:active { box-shadow: 0 2px 0 #16293b; }
   .btn.small { padding: 11px 18px; font-size: 16px; border-radius: 13px; }
   .btn[disabled] { opacity: .4; cursor: not-allowed; box-shadow:none; }
- 
+
   .row { display:flex; gap: 14px; flex-wrap: wrap; align-items:center; }
   .spread { justify-content: space-between; }
   .center { justify-content: center; }
- 
+
   .field-label { font-weight:800; color: var(--navy); margin-bottom: 8px; font-size: 17px; }
   .stepper { display:flex; align-items:center; gap: 14px; }
   .stepper .num {
@@ -126,7 +126,7 @@
   }
   .circle-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #0c1826; }
   .circle-btn:focus-visible { outline: 4px solid var(--gold); outline-offset: 3px; }
- 
+
   .prompt-bank { margin-top: 8px; }
   .chip-group-title { font-weight:800; color: var(--navy-soft); margin: 18px 0 8px; font-size: 15px; text-transform: uppercase; letter-spacing:1px; }
   .chips { display:flex; flex-wrap:wrap; gap: 10px; }
@@ -138,7 +138,7 @@
   .chip:hover { border-color: var(--green); }
   .chip.added { background: var(--green); color:#fff; border-color: var(--green); }
   .chip.added::before { content:"✓ "; }
- 
+
   .queue { margin-top: 18px; display:flex; flex-direction: column; gap: 10px; }
   .queue-item {
     display:flex; align-items:center; gap: 12px; background: var(--cream);
@@ -154,7 +154,7 @@
     font-size: 17px; font-family:'Nunito',sans-serif; font-weight:700; color: var(--ink);
   }
   .custom-row input:focus { outline:none; border-color: var(--green); }
- 
+
   .play-grid { display:grid; grid-template-columns: 1fr; gap: 22px; }
   .prompt-stage {
     background: linear-gradient(160deg, var(--navy) 0%, #1c3854 100%);
@@ -172,10 +172,10 @@
     font-size: clamp(30px, 6vw, 62px); line-height:1.05; margin: 10px 0 6px;
   }
   .prompt-hint { color:#AFC6D4; font-weight:700; font-size: clamp(14px,2vw,18px); }
- 
+
   .count-panel { display:grid; grid-template-columns: 1.1fr .9fr; gap: 22px; align-items: stretch; }
   @media (max-width: 820px){ .count-panel { grid-template-columns: 1fr; } }
- 
+
   .counter-card { background: var(--paper); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px; text-align:center; }
   .counter-card .label { font-weight:800; color: var(--navy-soft); font-size: 18px; }
   .big-count {
@@ -184,15 +184,15 @@
   }
   .count-controls { display:flex; align-items:center; justify-content:center; gap: 18px; margin-top: 6px; }
   .of-total { color: var(--mute); font-weight:800; font-size: 17px; margin-top: 2px; }
- 
+
   .live-graph-card { background: var(--paper); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px; display:flex; flex-direction:column; }
   .live-graph-card h3 { font-family:'Fredoka',sans-serif; margin: 0 0 4px; color: var(--navy); font-size: 20px; }
   .live-graph-card .cap { color: var(--mute); font-weight:700; font-size: 14px; margin-bottom: 8px; }
- 
-  .graph { display:flex; flex-direction:column; gap: 0; }
+
+  .graph { display:flex; flex-direction:column; gap: 0; padding-bottom: 40px; }
   .graph-inner { display:flex; align-items:flex-end; gap: clamp(8px,2vw,22px); height: 240px; padding: 0 6px; border-left: 3px solid var(--navy); border-bottom: 3px solid var(--navy); }
   .graph-inner.tall { height: 320px; }
-  .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
+  .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; position:relative; }
   .bar {
     width: 100%; max-width: 96px; border-radius: 10px 10px 0 0;
     display:flex; align-items:flex-start; justify-content:center;
@@ -204,16 +204,16 @@
     position:absolute; top:-30px; font-family:'Fredoka',sans-serif; font-weight:700;
     font-size: clamp(18px,2.4vw,26px); color: var(--navy);
   }
-  .bar-label { margin-top: 8px; font-weight:800; color: var(--navy); text-align:center; font-size: clamp(12px,1.6vw,15px); max-width: 130px; line-height:1.1; }
+  .bar-label { position:absolute; top:100%; left:0; right:0; margin-top: 8px; font-weight:800; color: var(--navy); text-align:center; font-size: clamp(12px,1.6vw,15px); line-height:1.1; }
   .bar-highlight { outline: 5px dashed var(--gold); outline-offset: 4px; }
- 
+
   .scale-note { font-size: 13px; color: var(--mute); font-weight:700; margin-top:6px; }
- 
+
   .progress { display:flex; gap: 8px; align-items:center; }
   .pdot { width: 14px; height:14px; border-radius:50%; background: var(--line); }
   .pdot.done { background: var(--green); }
   .pdot.current { background: var(--gold); transform: scale(1.25); }
- 
+
   .analyze-grid { display:grid; grid-template-columns: 1.15fr .85fr; gap: 22px; }
   @media (max-width: 900px){ .analyze-grid { grid-template-columns: 1fr; } }
   .qbox { background: var(--paper); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px; }
@@ -227,18 +227,18 @@
   }
   @keyframes pop { from{ transform: scale(.8); opacity:0;} to{transform:none;opacity:1;} }
   .qnav { display:flex; gap: 12px; margin-top: 18px; flex-wrap:wrap; }
- 
+
   .help-btn { background: var(--gold); color: var(--navy); }
   .ladder { margin-top: 14px; background: var(--cream); border: 2px solid var(--line); border-radius: 16px; padding: 16px 18px; display:none; }
   .ladder.show { display:block; animation: rise .3s ease both; }
   .ladder h4 { font-family:'Fredoka',sans-serif; margin: 0 0 8px; color: var(--navy-soft); font-size: 16px; }
   .ladder ol { margin: 0; padding-left: 22px; }
   .ladder li { font-weight:700; color: var(--ink); margin-bottom: 6px; font-size: 15px; }
- 
+
   footer.tips { margin-top: 22px; color: var(--mute); font-size: 13px; font-weight:700; text-align:center; }
- 
+
   .kbd { background:#fff; border:1px solid var(--line); border-bottom-width:3px; border-radius:6px; padding:1px 8px; font-family:'Fredoka',sans-serif; font-weight:600; color: var(--navy); font-size: 13px; }
- 
+
   @media (prefers-reduced-motion: reduce){
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
@@ -254,13 +254,13 @@
     </div>
     <div class="step-pill" id="stepPill">Set up</div>
   </header>
- 
+
   <section class="screen active" id="screen-setup">
     <div class="card">
       <div class="eyebrow">Before we play</div>
       <h2 class="big">Set up your class graph</h2>
       <p class="lead">Pick how many students are here, then choose the prompts you want to ask. Each prompt becomes one bar.</p>
- 
+
       <div style="margin-top:24px;">
         <div class="field-label">How many students are here today?</div>
         <div class="stepper">
@@ -270,24 +270,24 @@
           <span class="of-total">This is the most a bar can reach.</span>
         </div>
       </div>
- 
+
       <div class="prompt-bank">
         <div class="chip-group-title">⚽ Soccer &amp; World Cup</div>
         <div class="chips" id="chips-soccer"></div>
         <div class="chip-group-title">🎉 Just for fun</div>
         <div class="chips" id="chips-fun"></div>
- 
+
         <div class="custom-row">
           <input id="customInput" type="text" placeholder="Write your own: Have you ever…" maxlength="60" />
           <button class="btn btn-nav small" id="addCustom">Add</button>
         </div>
       </div>
- 
+
       <div style="margin-top:22px;">
         <div class="field-label">Your prompts <span id="queueCount" style="color:var(--green);"></span></div>
         <div class="queue" id="queue"></div>
       </div>
- 
+
       <div class="row spread" style="margin-top:26px;">
         <button class="btn btn-ghost" id="resetBtn">Clear all</button>
         <button class="btn btn-primary" id="startBtn">Start the game →</button>
@@ -295,7 +295,7 @@
     </div>
     <footer class="tips">Tip: 3 prompts matches the graph goal exactly. You can add more or stop whenever you like.</footer>
   </section>
- 
+
   <section class="screen" id="screen-play">
     <div class="play-grid">
       <div class="prompt-stage">
@@ -303,7 +303,7 @@
         <div class="prompt-q" id="playPrompt">Have you ever…</div>
         <div class="prompt-hint">Count the hands. Type the number. Watch the bar grow!</div>
       </div>
- 
+
       <div class="count-panel">
         <div class="counter-card">
           <div class="label">How many hands?</div>
@@ -317,7 +317,7 @@
             <button class="btn btn-gold" id="lockBtn">Lock in this bar ✓</button>
           </div>
         </div>
- 
+
         <div class="live-graph-card">
           <h3>Our graph so far</h3>
           <div class="cap" id="liveCap">Bar 1 is growing…</div>
@@ -325,7 +325,7 @@
           <div class="scale-note">Taller bar = more hands.</div>
         </div>
       </div>
- 
+
       <div class="row spread">
         <div class="progress" id="progress"></div>
         <div class="row">
@@ -336,7 +336,7 @@
       </div>
     </div>
   </section>
- 
+
   <section class="screen" id="screen-analyze">
     <div class="analyze-grid">
       <div class="card">
@@ -345,12 +345,12 @@
         <div class="cap" style="color:var(--mute);font-weight:700;margin-bottom:14px;">This graph is about US. Touch the top of a bar, slide to the number.</div>
         <div class="graph"><div class="graph-inner tall" id="finalGraph"></div></div>
       </div>
- 
+
       <div class="qbox">
         <div class="qnum" id="aqNum">QUESTION 1</div>
         <div class="qtext" id="aqText"></div>
         <div class="reveal-slot"><div id="aqReveal"></div></div>
- 
+
         <button class="btn help-btn small" id="helpBtn">Need a hint?</button>
         <div class="ladder" id="ladder">
           <h4>Read it step by step</h4>
@@ -362,7 +362,7 @@
             <li>Say how you know from the graph.</li>
           </ol>
         </div>
- 
+
         <div class="qnav">
           <button class="btn btn-gold" id="revealBtn">Show the answer</button>
           <button class="btn btn-nav small" id="prevQ">← Back</button>
@@ -376,11 +376,11 @@
     <footer class="tips">Every answer lives on the graph. If we disagree, we re-read the bar together.</footer>
   </section>
 </div>
- 
+
 <script>
 (function(){
   "use strict";
- 
+
   var BAR_COLORS = ['var(--bar-a)','var(--bar-b)','var(--bar-c)','var(--bar-d)','var(--bar-e)','var(--bar-f)'];
   var SOCCER = [
     "kicked a soccer ball",
@@ -398,15 +398,15 @@
     "sung a song out loud",
     "danced at a party"
   ];
- 
+
   var state = {
     classSize: 10,
-    prompts: [],    
-    current: 0,       
-    aq: 0,           
+    prompts: [],      
+    current: 0,      
+    aq: 0,          
     questions: []
   };
- 
+
   // ---------- Helpers ----------
   function $(id){ return document.getElementById(id); }
   function clamp(n,lo,hi){ return Math.max(lo, Math.min(hi, n)); }
@@ -417,13 +417,11 @@
     $('stepPill').textContent = pill;
     window.scrollTo({top:0, behavior:'smooth'});
   }
- 
-  // ---------- Setup: class size ----------
+
   function renderClass(){ $('classNum').textContent = state.classSize; $('totalStudents').textContent = state.classSize; }
   $('classMinus').onclick = function(){ state.classSize = clamp(state.classSize-1,1,40); renderClass(); redrawLive(); };
   $('classPlus').onclick = function(){ state.classSize = clamp(state.classSize+1,1,40); renderClass(); redrawLive(); };
- 
-  // ---------- Setup: prompt chips ----------
+
   function buildChips(listId, arr){
     var box = $(listId);
     arr.forEach(function(text){
@@ -456,7 +454,6 @@
       x.setAttribute('aria-label','Remove');
       x.onclick = function(){
         state.prompts.splice(i,1);
-        // unmark any chip
         document.querySelectorAll('.chip.added').forEach(function(ch){
           if(!state.prompts.some(function(pp){return pp.text===ch.dataset.text;})) ch.classList.remove('added');
         });
@@ -490,7 +487,7 @@
     document.querySelectorAll('.chip.added').forEach(function(c){ c.classList.remove('added'); });
     renderQueue();
   };
- 
+
   function renderGraph(container, prompts, opts){
     opts = opts || {};
     container.innerHTML = '';
@@ -523,7 +520,7 @@
     var upto = state.prompts.slice(0, state.current+1);
     renderGraph($('liveGraph'), upto, { showVals:true });
   }
- 
+
   function startGame(){
     if(!state.prompts.length) return;
     state.current = 0;
@@ -541,7 +538,6 @@
     redrawLive();
     $('lockBtn').disabled = false;
     $('lockBtn').textContent = 'Lock in this bar ✓';
-    // final-prompt button visibility
     var last = state.current === state.prompts.length-1;
     $('nextPrompt').style.display = last ? 'none' : '';
     $('toAnalyze').style.display = 'none';
@@ -580,13 +576,13 @@
       box.appendChild(d);
     });
   }
- 
+
   function buildQuestions(){
     var ps = state.prompts.map(function(p){ return {label:shortLabel(p.text), count:p.count, color:p.color}; });
     var qs = [];
     var sorted = ps.slice().sort(function(a,b){ return b.count-a.count; });
     var most = sorted[0], fewest = sorted[sorted.length-1];
- 
+
     qs.push({
       text: "Which one got the MOST hands?",
       answer: "\u201C" + most.label + "\u201D — " + most.count + " hands. It has the tallest bar.",
@@ -623,7 +619,7 @@
     });
     return qs;
   }
- 
+
   function goAnalyze(){
     state.questions = buildQuestions();
     state.aq = 0;
@@ -661,9 +657,9 @@
   $('prevQ').onclick = function(){ if(state.aq>0){ state.aq--; loadQuestion(); } };
   $('nextQ').onclick = function(){ if(state.aq<state.questions.length-1){ state.aq++; loadQuestion(); } };
   $('replayBtn').onclick = function(){ show('screen-setup','Set up'); };
- 
+
   $('startBtn').onclick = startGame;
- 
+
   document.addEventListener('keydown', function(e){
     if($('screen-play').classList.contains('active')){
       if(e.key===' '||e.key==='+'){ e.preventDefault(); setCount(state.prompts[state.current].count+1); }
@@ -675,8 +671,7 @@
       if(e.key==='Enter'){ $('revealBtn').click(); }
     }
   });
- 
-  // ---------- Init ----------
+
   buildChips('chips-soccer', SOCCER);
   buildChips('chips-fun', FUN);
   ['Have you ever kicked a soccer ball?','Have you ever eaten pizza?','Have you ever had a pet?'].forEach(function(t){
